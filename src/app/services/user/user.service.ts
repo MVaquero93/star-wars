@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 
 @Injectable({
@@ -7,7 +7,8 @@ import {Observable, of} from 'rxjs';
 
 export class UserService {
 
-  constructor() { }
+  constructor() {
+  }
 
   getAll(): Observable<any> {
     return of(this.getUsers());
@@ -21,7 +22,7 @@ export class UserService {
     return of(this.getUsers().find((user) => user.username === username));
   }
 
-  create(user): void {
+  create(user): Observable<any> {
 
     setTimeout(() => {
       this.getByUsername(user.username).subscribe((duplicateUser) => {
@@ -31,7 +32,7 @@ export class UserService {
           let users = this.getUsers()
 
           // assign id
-          const lastUser = users.slice(-1)[0] || { id: 0 };
+          const lastUser = users.slice(-1)[0] || {id: 0};
           user.id = lastUser.id + 1;
 
           // save to local storage
@@ -66,6 +67,6 @@ export class UserService {
   }
 
   private setUsers(users): void {
-   localStorage.users = JSON.stringify(users);
-}
+    localStorage.users = JSON.stringify(users);
+  }
 }

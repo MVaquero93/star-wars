@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UserService} from "../../services/user/user.service";
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,9 @@ export class RegisterComponent implements OnInit {
   form: FormGroup
   dataLoading: boolean
 
-  constructor() { }
+  constructor(
+    private userService: UserService
+  ) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -23,7 +26,9 @@ export class RegisterComponent implements OnInit {
   }
 
   register(): void {
-
+    this.dataLoading = true;
+    this.userService.create(this.form).subscribe(() => {
+      this.dataLoading = false;
+    }, () => 'error');
   }
-
 }
