@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
       () => {
         this.authenticationService.setCredentials(this.username, this.pass)
         this.dataLoading = false
-        // this.router.navigate(['ships'])
+        this.router.navigate(['ships'])
       },
       (err) => {
         this.credentialsError = err
