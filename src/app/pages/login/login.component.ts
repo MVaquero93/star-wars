@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl, Validators} from "@angular/forms";
+import {AuthenticationService} from "../../services/authentication/authentication.service";
 
 @Component({
   selector: 'app-login',
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  username = new FormControl('', [Validators.required])
+  pass = new FormControl('', [Validators.required])
+  dataLoading: boolean
+
+  constructor(
+    private authenticationService: AuthenticationService
+  ) { }
 
   ngOnInit(): void {
   }
 
+  getPassError(): string {
+    return '';
+  }
+
+  getUsernameError(): string {
+    return '';
+  }
+
+  login(): void {
+    this.dataLoading = true
+  }
 }
