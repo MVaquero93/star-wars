@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {Observable, of, throwError} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,36 +11,34 @@ export class UserService {
   }
 
   getAll(): Observable<any> {
-    return of(this.getUsers());
+    return this.getUsers();
   }
 
   getById(id): Observable<any> {
-    return of(this.getUsers().find((user) => user.id === id));
+    return this.getUsers().find((user) => user.id === id);
   }
 
-  getByUsername(username): Observable<any> {
-    return of(this.getUsers().find((user) => user.username === username));
+  getByUsername(username): any {
+    return this.getUsers().find((user) => user.username === username);
   }
 
   create(user): Observable<any> {
 
-    setTimeout(() => {
-      this.getByUsername(user.username).subscribe((duplicateUser) => {
-        if (duplicateUser !== null) {
-          return 'Username ' + user.username + ' is already taken';
-        } else {
-          let users = this.getUsers()
+    const duplicateUser = this.getByUsername(user.username)
+    if (duplicateUser) {
+      return throwError('Username ' + user.username + ' is already taken');
+    } else {
+      let users = this.getUsers()
 
-          // assign id
-          const lastUser = users.slice(-1)[0] || {id: 0};
-          user.id = lastUser.id + 1;
+      // assign id
+      const lastUser = users.slice(-1)[0] || {id: 0};
+      user.id = lastUser.id + 1;
 
-          // save to local storage
-          users = [...users, user];
-          this.setUsers(users);
-        }
-      });
-    }, 1000);
+      // save to local storage
+      users = [...users, user];
+      this.setUsers(users);
+      return of(users);
+    }
   }
 
   update(userUpdate): void {
@@ -59,7 +57,7 @@ export class UserService {
 
   // private functions
 
-  private getUsers(): any {
+  private getUsers() {
     if (!localStorage.users) {
       localStorage.users = JSON.stringify([]);
     }

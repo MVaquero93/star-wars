@@ -3,6 +3,8 @@ import {UserService} from "../user/user.service";
 import {base64} from "../../helpers/base64";
 import {HttpHeaders} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
+import {Observable, of, throwError} from "rxjs";
+import {delay} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -16,21 +18,12 @@ export class AuthenticationService {
     private cookieService: CookieService
   ) { }
 
-  login(username, password) {
-
-    /* Dummy authentication for testing, uses setTimeout to simulate api call
-     ----------------------------------------------*/
-    setTimeout(() => {
-      this.userService.getByUsername(username).subscribe(
-        (user) => {
-          if (user !== null && user.password === password) {
-              return 'success'
-            } else {
-              return 'Username or password is incorrect'
-            }
-        }
-      )
-    }, 1000);
+  login(username, password): Observable<any> {
+      const user = this.userService.getByUsername(username)
+      if (user && user.password === password) {
+        return of('success')
+      }
+      return throwError('Invalid credentials');
   }
 
   setCredentials(username, password) {
