@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from "../../services/user/user.service";
 import {Router} from "@angular/router";
+import {first} from "rxjs/operators";
 
 @Component({
   selector: 'app-register',
@@ -31,7 +32,9 @@ export class RegisterComponent implements OnInit {
 
   register(): void {
     this.dataLoading = true;
-    this.userService.create(this.form.value).subscribe(() => {
+    this.userService.create(this.form.value)
+      .pipe(first())
+      .subscribe(() => {
       this.dataLoading = false;
       this.router.navigate([''])
     }, (err) => {

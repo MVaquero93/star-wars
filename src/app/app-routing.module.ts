@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from './pages/login/login.component';
 import {RegisterComponent} from "./pages/register/register.component";
 import {AuthGuard} from "./guards/auth.guard";
+import {JedisComponent} from "./pages/jedis/jedis.component";
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'ships', canActivate: [AuthGuard],
     loadChildren: () => import('./pages/ships/ships.module').then(m => m.ShipsModule),
+  },
+  {
+    path: 'jedis', canActivate: [AuthGuard],
+    component: JedisComponent,
   },
   {
     path: '',

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
 import {AuthenticationService} from "../../services/authentication/authentication.service";
 import {Router} from "@angular/router";
+import {first} from "rxjs/operators";
 
 @Component({
   selector: 'app-login',
@@ -38,7 +39,8 @@ export class LoginComponent implements OnInit {
   login(): void {
     if (this.username.errors || this.pass.errors) return
     this.dataLoading = true
-    this.authenticationService.login(this.username.value, this.pass.value).subscribe(
+    this.authenticationService.login(this.username.value, this.pass.value)
+      .subscribe(
       () => {
         this.authenticationService.setCredentials(this.username, this.pass)
         this.dataLoading = false

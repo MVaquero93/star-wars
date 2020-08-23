@@ -14,9 +14,9 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (!this.cookieService.get('credentials')) return this.goToLogin()
-    const cookieCredentials = JSON.parse(this.cookieService.get('credentials'))
-    if(cookieCredentials.username) return true
-    return this.goToLogin()
+    const credentials = this.cookieService.get('credentials')
+    const cookieCredentials = JSON.parse(credentials)
+    return (cookieCredentials.username) ? true : this.goToLogin()
   }
 
   goToLogin() {

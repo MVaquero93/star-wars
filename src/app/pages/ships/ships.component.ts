@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ShipsService} from "../../services/ships/ships.service";
-import {tap} from "rxjs/operators";
+import {first, tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-ships',
@@ -23,7 +23,9 @@ export class ShipsComponent implements OnInit {
   }
 
   loadStarshipsPage() {
-    this.shipsService.getStarshipsList().subscribe((result) => {
+    this.shipsService.getStarshipsList()
+      .pipe(first())
+      .subscribe((result) => {
       this.apiResult = result
       this.starshipList =  result.results
     },
@@ -32,7 +34,9 @@ export class ShipsComponent implements OnInit {
   }
 
   loadNextPage(url) {
-    this.shipsService.getStarshipsList(url).subscribe((result) => {
+    this.shipsService.getStarshipsList(url)
+      .pipe(first())
+      .subscribe((result) => {
       this.apiResult = result
       this.starshipList = this.starshipList.concat(result.results)
     },
