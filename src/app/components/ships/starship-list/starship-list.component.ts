@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'starship-list',
@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StarshipListComponent implements OnInit {
 
-  constructor() { }
+  @Input() starshipList
+
+  constructor(
+  ) {
+  }
 
   ngOnInit(): void {
+    console.log(this.starshipList)
   }
 
 }

@@ -5,10 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { ShipsComponent } from './pages/ships/ships.component';
 import {ReactiveFormsModule} from "@angular/forms";
-import { StarshipListComponent } from './components/ships/starship-list/starship-list.component';
-import { StarshipComponent } from './components/ships/starship/starship.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -19,7 +17,8 @@ import { StarshipComponent } from './components/ships/starship/starship.componen
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

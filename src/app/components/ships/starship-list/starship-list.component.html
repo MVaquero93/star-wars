@@ -1,7 +1,7 @@
 <div class="ships">
   <div class="row">
-<!--    <starship *ngFor="item in starships" ng-repeat="item in $ctrl.starships" starship="item" class="col-xs-6 col-sm-6 col-md-3"></starship>-->
+    <ng-container *ngFor="let starship of starshipList">
+      <starship [starship]="starship"></starship>
+    </ng-container>
   </div>
 </div>
-<!--<button ng-click="$ctrl.fetchNextPage()" class="btn btn-primary">Más datos</button>-->
-<button  class="btn btn-primary">Más datos</button>
