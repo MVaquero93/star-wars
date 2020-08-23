@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
   }
 
   goToLogin() {
-    this.router.navigate([''])
+    this.router.navigate(['login'])
     return false
   }
 

@@ -1,6 +1,6 @@
 <div class="card" style="width: 18rem;">
   <h3 class="card-title">{{starship.name}}</h3>
   <div class="card-body">
-    <img style="width: 18rem" [src]="'https://starwars-visualguide.com/assets/img/starships/'+ getStarshipId() + '.jpg'">
+    <img onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ5Q16_8YJF86qKsiRHDGSu2RzYtAcXtCsPOg&usqp=CAU'" style="width: 18rem" [src]="'https://starwars-visualguide.com/assets/img/starships/'+ getStarshipId() + '.jpg'">
   </div>
 </div>

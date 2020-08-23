@@ -7,6 +7,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import {HttpClientService} from "./services/cache/http-client.service";
+import {CacheService} from "./services/cache/cache.service";
 
 @NgModule({
   declarations: [
@@ -20,7 +22,10 @@ import {HttpClientModule} from "@angular/common/http";
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    HttpClientService,
+    CacheService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

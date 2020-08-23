@@ -35,7 +35,6 @@ export class ShipsComponent implements OnInit {
     this.shipsService.getStarshipsList(url).subscribe((result) => {
       this.apiResult = result
       this.starshipList = this.starshipList.concat(result.results)
-      console.log(this.starshipList)
     },
       (err) => this.requestError = true)
   }

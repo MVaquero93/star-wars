@@ -14,7 +14,6 @@ export class StarshipListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.starshipList)
   }
 
 }

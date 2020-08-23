@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {HttpClientService} from "../cache/http-client.service";
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +9,10 @@ import {Observable} from "rxjs";
 export class ShipsService {
 
   constructor(
-    private http: HttpClient
+    private httpService: HttpClientService
   ) { }
 
   getStarshipsList(url = 'http://swapi.dev/api/starships/'): Observable<any> {
-    return this.http.get(url)
+    return this.httpService.get({url, cacheMins: 5})
   }
 }
